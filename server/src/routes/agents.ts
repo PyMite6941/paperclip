@@ -3335,7 +3335,7 @@ export function agentRoutes(
         if (result.status === "warn") result.status = "pass";
         return result;
       }
-      const providerAdapter = { anthropic: "claude_local", openai: "codex_local", openrouter: "opencode_local", xai: "grok_local" }[binding.provider as Exclude<typeof binding.provider, "greenchclaw" | "ollama">];
+      const providerAdapter = { anthropic: "claude_local", openai: "codex_local", openrouter: "opencode_local", xai: "grok_local" }[binding.provider as Exclude<typeof binding.provider, "greenchclaw" | "ollama" | "ollama_cloud">];
       const probe = await requireServerAdapter(providerAdapter).testEnvironment({ ...context, adapterType: providerAdapter, config: { ...context.config, engine: "cli" } });
       result.checks.push(...probe.checks);
       result.status = probe.status === "fail" ? "fail" : result.status === "warn" || probe.status === "warn" ? "warn" : "pass";
